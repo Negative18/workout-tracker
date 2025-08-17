@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Workout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Workout</h2>
+        <form action="/add" method="POST">
+            <div class="form-group">
+                <label for="exercise">Exercise:</label>
+                <input type="text" id="exercise" name="exercise" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="sets">Sets:</label>
+                <input type="number" id="sets" name="sets" required>
+            </div>
+            <div class="form-group">
+                <label for="reps">Reps:</label>
+                <input type="number" id="reps" name="reps" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <input type="number" id="weight" name="weight">
+            </div>
+            <div class="form-group">
+                <label for="unit">Unit:</label>
+                <select id="unit" name="unit">
+                    <option value="kg">kg</option>
+                    <option value="lb">lb</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Add Workout</button>
+        </form>
+    </div>
+</body>
+</html>

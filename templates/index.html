@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workout Logs</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="background-color" content="#ffffff">
+
+    
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/static/service-worker.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+</script>
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>Workout Tracker</h1>
+        <div>
+            <a href="/">🏠 Home</a>
+            <a href="/add">➕ Add Workout</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        {% if workouts %}
+            {% for workout in workouts %}
+                <div class="card">
+                    <div class="card-content">
+                        <h2>{{ workout[4] }}</h2>
+                        <p><strong>{{ workout[1] }}</strong></p>
+                        <p>{{ workout[2] }} sets × {{ workout[3] }} reps - {{ workout[5] }} {{ workout[6] }}</p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="/edit/{{ workout[0] }}" class="btn edit-btn">✏️ Edit</a>
+                        <form action="/delete/{{ workout[0] }}" method="POST" class="inline-form" onclick="return confirm('Are you sure you want to delete this workout?');">
+                            <button type="submit" class="btn delete-btn">🗑 Delete</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No workouts logged yet. Click "Add Workout" to get started!</p>
+        {% endif %}
+    </div>
+
+
+
+
+</body>
+</html>
